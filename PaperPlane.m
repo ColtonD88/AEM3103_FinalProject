@@ -58,32 +58,34 @@
 	
 	
 %Variation of height and initial velocity.    
-    % figure
-    % subplot(2,1,1)
-	% plot(xa_lowv(:,4),xa_lowv(:,3),'red',xa_nomv(:,4),xa_nomv(:,3), 'black',xa_highv(:,4),xa_highv(:,3),'green')
-	% xlabel('Range, m'), ylabel('Height, m'), grid
-    % legend('Low V = 2','Nominal V = 3.55','High V = 7.55')
-    % title('Initial Velocity Analysis')
-    % subplot(2,1,2)
-    % plot(xa_lowf(:,4),xa_lowf(:,3),'red',xa_nomf(:,4),xa_nomf(:,3),'black',xa_highf(:,4),xa_highf(:,3),'green')
-	% xlabel('Range, m'), ylabel('Height, m'), grid
-    % title('Flight Path Angle Analysis')
-    % legend('Low \gamma = -0.5','Nominal \gamma = -0.18','High \gamma = 0.4')
+    figure
+    subplot(2,1,1)
+	plot(xa_lowv(:,4),xa_lowv(:,3),'red',xa_nomv(:,4),xa_nomv(:,3), 'black',xa_highv(:,4),xa_highv(:,3),'green')
+	xlabel('Range, m'), ylabel('Height, m'), grid
+    legend('Low V = 2','Nominal V = 3.55','High V = 7.55')
+    title('Initial Velocity Analysis')
+    subplot(2,1,2)
+    plot(xa_lowf(:,4),xa_lowf(:,3),'red',xa_nomf(:,4),xa_nomf(:,3),'black',xa_highf(:,4),xa_highf(:,3),'green')
+	xlabel('Range, m'), ylabel('Height, m'), grid
+    title('Flight Path Angle Analysis')
+    legend('Low \gamma = -0.5','Nominal \gamma = -0.18','High \gamma = 0.4')
 
 
 %100 Varying initial conditions. Need to find way
 figure
 colormap parula
 hold on
+xlabel('Range, m'), ylabel('Height, m'), grid
+title('Varying Initial Velocity and Flight Path Angle')
 N = 100;
 V_max = 7.55;
 V_min = 0;
 Gam_max = 0.4;
 Gam_min = -.5;
 
-    conc_time = zeroes(1,N);
-    conc_range = zeroes(1,N);
-    conc_height = zeroes(1,N);
+    conc_time = zeros(1,N);
+    conc_range = zeros(1,N);
+    conc_height = zeros(1,N);
 
  for i = 1:N
     
@@ -94,27 +96,10 @@ Gam_min = -.5;
     [te,xe]	=	ode23('EqMotion',tspan,xo_rand);
     plot(xe(:,4),xe(:,3))
 
-    conc_time(i) = 1;
-    conc_range(i) = 1;
-    conc_height(i) = 1;
+     conc_time(i) = te(i,1);
+    % conc_range(i) = 1;
+    % conc_height(i) = 1;
  end
-xlabel('Range, m'), ylabel('Height, m'), grid
-title('Varying Initial Velocity and Flight Path Angle')
 
-	% figure
-	% plot(xa(:,4),xa(:,3),xb(:,4),xb(:,3),xc(:,4),xc(:,3),xd(:,4),xd(:,3))
-	% xlabel('Range, m'), ylabel('Height, m'), grid
-    % 
-	% figure
-	% subplot(2,2,1)
-	% plot(ta,xa(:,1),tb,xb(:,1),tc,xc(:,1),td,xd(:,1))
-	% xlabel('Time, s'), ylabel('Velocity, m/s'), grid
-	% subplot(2,2,2)
-	% plot(ta,xa(:,2),tb,xb(:,2),tc,xc(:,2),td,xd(:,2))
-	% xlabel('Time, s'), ylabel('Flight Path Angle, rad'), grid
-	% subplot(2,2,3)
-	% plot(ta,xa(:,3),tb,xb(:,3),tc,xc(:,3),td,xd(:,3))
-	% xlabel('Time, s'), ylabel('Altitude, m'), grid
-	% subplot(2,2,4)
-	% plot(ta,xa(:,4),tb,xb(:,4),tc,xc(:,4),td,xd(:,4))
-	% xlabel('Time, s'), ylabel('Range, m'), grid
+
+
