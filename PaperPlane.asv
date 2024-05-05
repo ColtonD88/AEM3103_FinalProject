@@ -101,14 +101,7 @@ conc_time = [];
     conc_range = [conc_range;xe(:,4)];
     conc_time = [conc_time;te];
  end
+p1 = polyfit(conc_time,conc_range,7)
+p2 = polyfit(conc_time,conc_height,2)
 
-height_sort = sort(conc_height);
-time_sort = sort(conc_time);
-range_sort = sort(conc_range);
-
-p1 = polyfit(time_sort,range_sort,3)
-p2 = polyfit(conc_time,conc_height,1)
-
-
-plot(p1)
-plot(p2)
+plot(,)
