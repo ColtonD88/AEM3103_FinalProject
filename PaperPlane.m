@@ -57,17 +57,17 @@
 	xo		=	[3*V;0;H;R];
 	[td,xd]	=	ode23('EqMotion',tspan,xo);
 	
-	
+%% Single Param Variation
 %Variation of height and initial velocity.    
     figure
     subplot(2,1,1)
 	plot(xa_lowv(:,4),xa_lowv(:,3),'red',xa_nomv(:,4),xa_nomv(:,3), 'black',xa_highv(:,4),xa_highv(:,3),'green')
-	xlabel('Range, m'), ylabel('Height, m'), grid
+	xlabel('Range (m)'), ylabel('Height (m)'), grid
     legend('Low V = 2','Nominal V = 3.55','High V = 7.55')
     title('Initial Velocity Analysis')
     subplot(2,1,2)
     plot(xa_lowf(:,4),xa_lowf(:,3),'red',xa_nomf(:,4),xa_nomf(:,3),'black',xa_highf(:,4),xa_highf(:,3),'green')
-	xlabel('Range, m'), ylabel('Height, m'), grid
+	xlabel('Range (m)'), ylabel('Height (m)'), grid
     title('Flight Path Angle Analysis')
     legend('Low \gamma = -0.5','Nominal \gamma = -0.18','High \gamma = 0.4')
 
@@ -76,7 +76,7 @@
 figure
 colormap parula
 hold on
-xlabel('Range, m'), ylabel('Height, m'), grid
+xlabel('Range (m)'), ylabel('Height (m)'), grid
 title('Varying Initial Velocity and Flight Path Angle')
 N = 100;
 V_max = 7.55;
@@ -112,26 +112,35 @@ height_avg = [height_avg;mean(conc_height(k,:))];
 range_avg = [range_avg;mean(conc_range(k,:))];
 end
 
-
+plot(range_avg,height_avg,'--o','LineWidth', 3)
 p1 = polyfit(te,range_avg,6);
 p2 = polyfit(te,height_avg,6);
 
 RangeVal = polyval(p1,te);
 HeightVal = polyval(p2,te);
-drdt = zeros(1,51);
-dhdt = zeros(1,51);
+drdt = zeros(1,50);
+dhdt = zeros(1,50);
 
-for i = 1:50
+for i = 2:49
 drdt(i) = (RangeVal(i+1)-RangeVal(i-1))/(te(i+1)-te(i-1));
 end
 
-for i = 1:50
+for i = 2:49
 dhdt(i) = (HeightVal(i+1)-HeightVal(i-1))/(te(i+1)-te(i-1));
 end
 
-% figure
-% plot(te,height_avg,te,range_avg)
-% plot(range_avg,height_avg)
+ figure
+ hold on
 
-%plot(te,)
+ subplot(1,2,1)
+plot(te,drdt)
+title('Range Derivative')
+xlabel('Time (s)')
+ylabel('Distance over time')
+
+ subplot(1,2,2)
+plot(te,dhdt)
+title('Height Derivative')
+xlabel('Time (s)')
+ylabel('Height over time')
 

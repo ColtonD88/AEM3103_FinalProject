@@ -5,9 +5,14 @@
   - By: Colton Davies
 
   ## Summary of Findings
+  <Show the variations studied in a table>
 
-	- This project provides a comprehensive insight into the effect of initial flight conditions on the paper airplanes trajectory. Altering any of these initial values dramatically changes the resulting flight.
+  Summarized what was accomplished in this study.  Describe 2-4 observations from simulating the flight path.
+  Reference the figures below as needed.
 
+	- This project provides a comprehensive insight into the effect of initial flight conditions on the paper airplanes trajectory. Altering any of these initial vla
+
+  *If the analysis falls short of the goal, this is your chance to explain what was done or what were the barriers.*
  
   # Code Listing
   A list of each function/script and a single-line description of what it does.  The name of the function/script should link to the file in the repository on GitHub.
@@ -15,7 +20,7 @@
 	-[PaperPlane](AEM3103_Final/PaperPlane.m)
 		- This script contains the entirety of graphing and analysis of the paper plane flight. Range and distance both evaluated while varying initial velocity as well as initial flight path angle. 
 	-[EqMotion](AEM3103_Final/EqMotion.m)
-        - This function utilizes all initial parameters and calculates the following range and distance associated with each given timestep, it is referenced in PaperPlane script for each trajectory calculation.
+        - This function utilizes all initial parameters and calculates the following range and distance associated with each given timestep.
 
   # Figures
 
@@ -29,10 +34,8 @@
   ## Fig. 2: Monte Carlo Simulation
 ![Randomized Initial Parameters](RandomVariation.jpg)
 
-    - This figure presents the monte carlo simulation of the airplane trajectories. The initial velocity and the flight path angle were varied randomly between a max and min value to provide 100 distinct flight paths.
+    - This figure presents the monte carlo simulation of the airplane trajectories. The initial velocity and the flight path angle were varied randomly between a max and min value.
 
 
  ## Fig. 3: Time Derivatives
 ![Range and Distance Derivatives](Derivatives.jpg)
-
-    - This figure establishes an estimated time derivative of the height and range respectively utilizing the central method of derivative calculation.
