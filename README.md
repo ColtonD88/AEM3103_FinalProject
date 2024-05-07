@@ -12,9 +12,9 @@
   # Code Listing
   A list of each function/script and a single-line description of what it does.  The name of the function/script should link to the file in the repository on GitHub.
 
-	-[PaperPlane](AEM3103_Final/PaperPlane.m)
+	-[PaperPlane](https://github.com/ColtonD88/AEM3103_FinalProject/blob/main/PaperPlane.m)
 		- This script contains the entirety of graphing and analysis of the paper plane flight. Range and distance both evaluated while varying initial velocity as well as initial flight path angle. 
-	-[EqMotion](AEM3103_Final/EqMotion.m)
+	-[EqMotion](https://github.com/ColtonD88/AEM3103_FinalProject/blob/main/EqMotion.m)
         - This function utilizes all initial parameters and calculates the following range and distance associated with each given timestep, it is referenced in PaperPlane script for each trajectory calculation.
 
   # Figures
