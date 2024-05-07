@@ -1,7 +1,7 @@
 %	Example 1.3-1 Paper Airplane Flight Path
 %	Copyright 2005 by Robert Stengel
 %	August 23, 2005
-
+%% Given Airplane Analysis
 	global CL CD S m g rho	
 	S		=	0.017;			% Reference Area, m^2
 	AR		=	0.86;			% Wing Aspect Ratio
@@ -72,7 +72,7 @@
     legend('Low \gamma = -0.5','Nominal \gamma = -0.18','High \gamma = 0.4')
 
 
-%100 Varying initial conditions. Need to find way
+%% Monte Carlo simulation
 figure
 colormap parula
 hold on
@@ -88,27 +88,50 @@ conc_height = [];
 conc_range = [];
 conc_time = [];
 
+
  for i = 1:N
     V_rand = V_min + (V_max-V_min)*rand(1);
     Gam_rand = Gam_min + (Gam_max-Gam_min)*rand(1);
-    %conc_height_new = [xe(:,3)];
 
     xo_rand = [V_rand;Gam_rand;H;R];
     [te,xe]	=	ode23('EqMotion',tspan_new,xo_rand);
     plot(xe(:,4),xe(:,3))
 
-    conc_height = [conc_height;xe(:,3)];
-    conc_range = [conc_range;xe(:,4)];
-    conc_time = [conc_time;te];
+    conc_height = [conc_height xe(:,3)];
+    conc_range = [conc_range xe(:,4)];
+    conc_time = [conc_time te];
+    
  end
 
-height_sort = sort(conc_height);
-time_sort = sort(conc_time);
-range_sort = sort(conc_range);
+height_avg = [];
+range_avg = [];
 
-p1 = polyfit(time_sort,range_sort,3)
-p2 = polyfit(conc_time,conc_height,1)
+%% Derivative finding
+for k = 1:50
+height_avg = [height_avg;mean(conc_height(k,:))];
+range_avg = [range_avg;mean(conc_range(k,:))];
+end
 
 
-plot(p1)
-plot(p2)
+p1 = polyfit(te,range_avg,6);
+p2 = polyfit(te,height_avg,6);
+
+RangeVal = polyval(p1,te);
+HeightVal = polyval(p2,te);
+drdt = zeros(1,51);
+dhdt = zeros(1,51);
+
+for i = 1:50
+drdt(i) = (RangeVal(i+1)-RangeVal(i-1))/(te(i+1)-te(i-1));
+end
+
+for i = 1:50
+dhdt(i) = (HeightVal(i+1)-HeightVal(i-1))/(te(i+1)-te(i-1));
+end
+
+% figure
+% plot(te,height_avg,te,range_avg)
+% plot(range_avg,height_avg)
+
+%plot(te,)
+
